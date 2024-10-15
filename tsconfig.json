@@ -1,19 +1,15 @@
 {
-  "exclude": ["./dist"],
-  "ts-node": {
-    "transpileOnly": true,
-    "files": true
-  },
   "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
-    "sourceMap": true,
-    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "noImplicitAny": true,
     "skipLibCheck": true,
-    "moduleResolution": "node"
-  }
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "outDir": "./dist",
+    "noImplicitAny": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
