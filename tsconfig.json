@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "commonjs",
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
     "strict": true,
-    "outDir": "./dist",
-    "noImplicitAny": true
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "lib": ["es2015"]
 }

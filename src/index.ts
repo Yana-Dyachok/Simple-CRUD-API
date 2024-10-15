@@ -12,10 +12,6 @@ const server = createServer((req, res) => {
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-process.on('SIGINT', () => {
-  server.close(() => {
-    console.log('Server closed.');
-    process.exit(0);
-  });
+process.on('SIGINT', async () => {
+  process.exit();
 });

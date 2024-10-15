@@ -1,14 +1,12 @@
 {
   "name": "simple-crud-api",
   "version": "1.0.0",
-  "type": "module",
   "description": "A simple Node.js CRUD API that uses an in-memory database",
-  "main": "dist/bundle.cjs",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js",
-    "start:dev": "nodemon --exec node --loader ts-node/esm src/index.ts",
-    "start:prod": "npm run build && node dist/bundle.cjs",
-    "lint": "eslint src",
+    "start": "nodemon ./src/index.ts",
+    "start:dev": "nodemon ./src/index.ts",
+    "start:prod": "tsc --build --clean && tsc && node dist/index.js",
+    "lint": "eslint .",
     "fix": "npx eslint src --fix"
   },
   "keywords": [
@@ -39,13 +37,9 @@
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.5",
-    "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.3",
-    "uuid": "^10.0.0",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-node-externals": "^3.0.0"
+    "uuid": "^10.0.0"
   }
 }
