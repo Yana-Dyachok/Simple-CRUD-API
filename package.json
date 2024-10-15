@@ -1,0 +1,20 @@
+{
+  "name": "simple-crud-api",
+  "version": "1.0.0",
+  "description": "A simple Node.js CRUD API that uses an in-memory database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "simple-crud-api",
+    "nodejs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yana-Dyachok/Simple-CRUD-API"
+  },
+  "author": "Yana-Dyachok",
+  "license": "ISC"
+}

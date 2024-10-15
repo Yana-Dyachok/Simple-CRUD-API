@@ -1,0 +1,19 @@
+{
+  "exclude": ["./dist"],
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true
+  },
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node"
+  }
+}
