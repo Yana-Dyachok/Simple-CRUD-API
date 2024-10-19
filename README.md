@@ -21,7 +21,7 @@ git checkout develop
 npm i
 ```
 ## Scripts
- Scripts                  |   instructions                         | Comands
+ Scripts                  |   instructions                         | Commands
 --------------------------|:---------------------------------------|:-----------------------------
 ESLint                    | check:                                 | npm run lint 
 Prettier                  | fix and formats files:                 | npm run format

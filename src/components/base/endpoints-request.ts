@@ -1,10 +1,10 @@
 import { IRequest, IResponse, IUserWithId } from '../../types/interface';
 import { Methods, StatusCode, StatusMessages, BaseAPI } from '../../types/enum';
-import { dataUsers } from '../ui/data-users';
 import { isBodyValid } from '../../utils/body-validation';
 import { validateUUID } from '../../utils/validation-uuid';
 import { createUniqueUser } from '../ui/create-unique-user';
 
+import { saveUsersToFile, loadUsersFromFile } from '../../libs/db-operations';
 export const handleEndpointRequest = async (requestObject: IRequest): Promise<IResponse> => {
   const { endpoint, method, body } = requestObject;
   const isDynamicPath =
@@ -21,10 +21,12 @@ export const handleEndpointRequest = async (requestObject: IRequest): Promise<IR
     data: data,
   });
 
+  const users = await loadUsersFromFile();
+
   if (isDynamicPath && method === Methods.GET) {
     const id = endpoint.split('/')[3]!;
     const isValidUUID = validateUUID(id);
-    const user = dataUsers.find((user) => user.id === id);
+    const user = users.find((user) => user.id === id);
 
     if (!isValidUUID) {
       return createResponse(StatusCode.INVALID_REQUEST, `The provided ID=${id} is not valid`);
@@ -47,11 +49,14 @@ export const handleEndpointRequest = async (requestObject: IRequest): Promise<IR
     }
 
     if (isValidUUID && isValidBodySchema) {
-      const user = dataUsers.find((user) => user.id === id);
+      const user = users.find((user) => user.id === id);
 
       if (user) {
         const updatedUser = { id, ...body };
-        dataUsers.splice(dataUsers.indexOf(user), 1, updatedUser);
+        users.splice(users.indexOf(user), 1, updatedUser);
+
+        await saveUsersToFile(users);
+
         return createResponse(StatusCode.SUCCESS, StatusMessages.OPERATION_SUCCESSFUL, updatedUser);
       } else {
         return createResponse(StatusCode.NOT_FOUND, `User with ID <${id}> doesn't exist`);
@@ -68,14 +73,16 @@ export const handleEndpointRequest = async (requestObject: IRequest): Promise<IR
   if (isDynamicPath && method === Methods.DELETE) {
     const id = endpoint.split('/')[3]!;
     const isValidUUID = validateUUID(id);
-    const user = dataUsers.find((user) => user.id === id);
+    const user = users.find((user) => user.id === id);
 
     if (!isValidUUID) {
       return createResponse(StatusCode.INVALID_REQUEST, `The provided ID=${id} is not valid`);
     }
 
     if (user) {
-      dataUsers.splice(dataUsers.indexOf(user), 1);
+      users.splice(users.indexOf(user), 1);
+      await saveUsersToFile(users);
+
       return createResponse(StatusCode.NO_RESPONSE, StatusMessages.USER_REMOVED);
     } else {
       return createResponse(StatusCode.NOT_FOUND, `User with ID <${id}> doesn't exist`);
@@ -85,14 +92,17 @@ export const handleEndpointRequest = async (requestObject: IRequest): Promise<IR
   switch (endpoint) {
     case BaseAPI.USER: {
       if (method === Methods.GET) {
-        return createResponse(StatusCode.SUCCESS, StatusMessages.OPERATION_SUCCESSFUL, dataUsers);
+        return createResponse(StatusCode.SUCCESS, StatusMessages.OPERATION_SUCCESSFUL, users);
       }
 
       if (method === Methods.POST && body) {
         const isValidBodySchema = isBodyValid(body);
         if (isValidBodySchema) {
           const newUser = createUniqueUser(body);
-          dataUsers.push(newUser);
+          users.push(newUser);
+
+          await saveUsersToFile(users);
+
           return createResponse(StatusCode.RESOURCE_CREATED, StatusMessages.USER_CREATED, newUser);
         } else {
           return createResponse(StatusCode.INVALID_REQUEST, StatusMessages.REQUEST_FAILURE);

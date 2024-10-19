@@ -3,11 +3,14 @@ import { sendResponse } from '../components/ui/send-response';
 import { StatusCode, StatusMessages, Methods } from '../types/enum';
 import { handleEndpointRequest } from '../components/base/endpoints-request';
 import { IRequest } from '../types/interface';
+import { controlDB } from '../libs/db-operations';
 import 'dotenv/config';
 
 const port = process.env.PORT || 4000;
 
-export const app = () => {
+export const app = async () => {
+  await controlDB.start();
+
   const server = createServer(async (req, res) => {
     let body: string = '';
 
@@ -57,6 +60,7 @@ export const app = () => {
   });
 
   process.on('SIGINT', async () => {
+    await controlDB.end();
     process.exit();
   });
 };
