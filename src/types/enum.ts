@@ -1,7 +1,5 @@
 export enum BaseAPI {
-  DEFAULT = '/',
   USER = '/api/users',
-  USER_ID = '/api/users/',
 }
 
 export enum Methods {
@@ -31,8 +29,7 @@ export enum StatusMessages {
   OPERATION_SUCCESSFUL = 'Operation completed successfully',
   INVALID_USER_DATA = 'Provided user data is invalid',
   REQUEST_FAILURE = 'The request is invalid',
-  AUTHENTICATION_FAILED = 'Authentication required',
+  SERVER_ERROR = 'Internal Server Error',
   RESOURCE_NOT_AVAILABLE = 'The requested resource was not found',
-  FUNCTIONALITY_NOT_SUPPORTED = 'Functionality not yet implemented',
   SERVICE_TEMPORARILY_UNAVAILABLE = 'The service is temporarily unavailable',
 }

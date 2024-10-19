@@ -6,7 +6,7 @@
     "start": "nodemon ./src/index.ts",
     "start:dev": "nodemon ./src/index.ts",
     "start:prod": "tsc --build --clean && tsc && node dist/index.js",
-    "start:multi": "nodemon ./src/",
+    "start:multi": "nodemon ./src/horizontal-scaling/horizontal-scaling.ts",
     "lint": "eslint .",
     "format": "npx eslint src --fix",
     "test": "jest --coverage"

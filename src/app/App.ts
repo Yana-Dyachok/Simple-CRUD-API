@@ -42,15 +42,16 @@ export const app = async () => {
 
         sendResponse(res, response.statusCode, responseData);
       } catch (error) {
+        await controlDB.end();
         sendResponse(res, StatusCode.SERVER_FAILURE, {
-          error: StatusMessages.REQUEST_FAILURE,
+          error: StatusMessages.SERVER_ERROR,
         });
       }
     });
 
     req.on('error', () => {
       sendResponse(res, StatusCode.SERVER_FAILURE, {
-        error: StatusMessages.REQUEST_FAILURE,
+        error: StatusMessages.SERVER_ERROR,
       });
     });
   });
