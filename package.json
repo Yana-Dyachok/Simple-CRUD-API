@@ -6,8 +6,9 @@
     "start": "nodemon ./src/index.ts",
     "start:dev": "nodemon ./src/index.ts",
     "start:prod": "tsc --build --clean && tsc && node dist/index.js",
+    "start:multi": "nodemon ./src/",
     "lint": "eslint .",
-    "fix": "npx eslint src --fix"
+    "format": "npx eslint src --fix"
   },
   "keywords": [
     "cli",
