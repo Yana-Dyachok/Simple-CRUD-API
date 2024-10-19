@@ -5,7 +5,7 @@ import prettier from 'eslint-plugin-prettier';
 
 export default [
   {
-    ignores: ['dist'], 
+    ignores: ['dist', 'coverage'], 
   },
   {
     files: ['src/**/*.ts'], 

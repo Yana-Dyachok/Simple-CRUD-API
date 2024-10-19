@@ -8,7 +8,8 @@
     "start:prod": "tsc --build --clean && tsc && node dist/index.js",
     "start:multi": "nodemon ./src/",
     "lint": "eslint .",
-    "format": "npx eslint src --fix"
+    "format": "npx eslint src --fix",
+    "test": "jest --coverage"
   },
   "keywords": [
     "cli",
@@ -28,6 +29,7 @@
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.9.0",
     "@typescript-eslint/parser": "^8.9.0",
+    "babel-plugin-istanbul": "^7.0.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "eslint": "^9.12.0",
