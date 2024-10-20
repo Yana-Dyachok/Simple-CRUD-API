@@ -13,7 +13,7 @@ export interface IUserWithId extends IUser {
 export interface IRequest {
   method?: keyof typeof Methods;
   endpoint?: string;
-  body: IUser;
+  body: IUser | null;
 }
 
 export interface IResponse {
