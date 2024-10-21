@@ -10,7 +10,8 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
+  "include": ["src/**/*.ts"],
   "lib": ["es2015"]
 }
