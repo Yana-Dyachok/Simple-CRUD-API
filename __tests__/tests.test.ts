@@ -1,5 +1,5 @@
 import { handleEndpointRequest } from '../src/components/base/endpoints-request';
-import { IRequest, IResponse, IUserWithId } from '../src/types/interface';
+import { IRequest, IResponse, IUserWithId, IUser } from '../src/types/interface';
 import { Methods, StatusCode, StatusMessages, BaseAPI } from '../src/types/enum';
 import { saveUsersToFile, loadUsersFromFile } from '../src/libs/db-operations';
 import { isBodyValid } from '../src/utils/body-validation';
@@ -184,7 +184,7 @@ describe('Scenario-2 With a DELETE request, we are trying to delete objects', ()
   });
 });
 
-describe('Scenario-3 A new object is created by a POST ', () => {
+describe('Scenario-3 Without body can not create object by a POST request ', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (loadUsersFromFile as jest.Mock).mockResolvedValue(mockUsers);
@@ -207,7 +207,6 @@ describe('Scenario-3 A new object is created by a POST ', () => {
     });
   });
 });
-
 
 describe('Scenario-4 With a GET request, we are trying to get a deleted object by id ', () => {
   beforeEach(() => {
@@ -232,4 +231,28 @@ describe('Scenario-4 With a GET request, we are trying to get a deleted object b
       data: undefined,
     });
   });
+});
+
+describe('Scenario-5 Сheck body validation', () => {
+
+  it('should return true for a valid body with all fields', () => {
+    const validBody: IUser = {
+      username: 'Alex',
+      age: 31,
+      hobbies: ['football', 'swimming'],
+    };
+
+    expect(isBodyValid(validBody)).toBe(true);
+  });
+
+  it('should return true if "hobbies" is an empty array', () => {
+    const validEmptyHobbiesBody: IUser = {
+      username: 'Alex',
+      age: 31,
+      hobbies: [],
+    };
+
+    expect(isBodyValid(validEmptyHobbiesBody)).toBe(true);
+  });
+
 });
